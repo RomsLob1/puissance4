@@ -27,7 +27,7 @@ def type_pion(pion: dict) -> bool:
 
 def construirePion(couleur : int) -> dict :
     """
-    Déterminer la couleur du pion
+    Construire un pion ayant une couleur et un id
     :param couleur: couleur du pion
     :return: Pion construit avec la couleur donnée en paramètre
     """
@@ -41,6 +41,14 @@ def construirePion(couleur : int) -> dict :
         raise ValueError(f"construirePion : la couleur ({couleur}) n'est pas correcte")
     return pion
 
-print(construirePion(2))
+def getCouleurPion(pion : dict) -> str :
+    """
+    Déterminer la couleur du pion
+    :param pion: Pion construit à partir de la fonction construirePion
+    :return: Couleur du pion
+    """
+    if type_pion == False :
+        raise TypeError(f"getCouleurPion : Le paramètre n'est pas un pion")
+    return pion[const.COULEUR]
 
 
