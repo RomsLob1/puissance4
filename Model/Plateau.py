@@ -47,3 +47,20 @@ def construirePlateau() -> list :
     return plateau
 
 def placerPionPlateau(plateau : list, pion : dict, colonne : int) -> int :
+    """
+    Place le Pion dans le plateau en choisissant la colonne donnée en paramètre, retourne la ligne ou le pion atterit
+    :param plateau: Liste 2d formant un tableau
+    :param pion: Dictionnaire représentant un pion
+    :param colonne: Numéro de la colonne où déposer le pion
+    :return: Ligne où atterit le pion
+    """
+    ligne = -1
+    i = const.NB_LINES -1
+    while i >= 0 and ligne == -1:
+        if plateau[i][colonne] is None :
+            plateau[i][colonne] = pion
+            ligne = i
+        i = i - 1
+        print(i)
+    return ligne
+
