@@ -34,4 +34,15 @@ def type_plateau(plateau: list) -> bool:
         return False
     return True
 
+def constuirePlateau() -> list :
+    """
+    Construit un plateau
+    :return: Liste 2D formant un tableau de ligne
+    """
+    plateau = []
+    for i in range(const.NB_LINES) :
+        plateau.append([])
+        for j in range(const.NB_COLUMNS):
+            plateau[i].append(None)
+    return plateau
 
