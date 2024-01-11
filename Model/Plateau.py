@@ -1,5 +1,6 @@
 from Model.Constantes import *
 from Model.Pion import *
+from random import randint, choice
 
 
 #
@@ -71,3 +72,13 @@ def placerPionPlateau(plateau : list, pion : dict, colonne : int) -> int :
         i = i - 1
     return ligne
 
+def toStringPlateau(plateau : list) -> str :
+    """
+    A partir d'une liste 2d , retourne une chaine de caractère représentant le tableau
+    :param plateau: Liste 2d formant un tableau
+    :return: chaine de caractère qui représente le tableau
+    """
+    p = construirePlateau()
+    for i in range(20):
+        placerPionPlateau(p, construirePion(choice(const.COULEURS)), randint(0, const.NB_COLUMNS - 1))
+    print(toStringPlateau(p))
