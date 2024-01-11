@@ -46,3 +46,4 @@ def construirePlateau() -> list :
             plateau[i].append(None)
     return plateau
 
+def placerPionPlateau(plateau : list, pion : dict, colonne : int) -> int :
