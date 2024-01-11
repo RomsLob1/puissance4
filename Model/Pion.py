@@ -69,7 +69,7 @@ def setCouleurPion(pion : dict, couleur2 : int) -> None :
         raise ValueError(f"construirePion : le second paramètre ({couleur2}) n'est pas une couleur")
     return None
 
-def getIDPion(pion : dict) -> int :
+def getIdPion(pion : dict) -> int :
     """
     Obtenir l'ID du pion
     :param pion: Pion construit à partir de la fonction construirePion
