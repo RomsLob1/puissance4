@@ -54,13 +54,20 @@ def placerPionPlateau(plateau : list, pion : dict, colonne : int) -> int :
     :param colonne: Numéro de la colonne où déposer le pion
     :return: Ligne où atterit le pion
     """
+    if type_plateau(plateau) == False :
+        raise TypeError(f"placerPionPlateau : Le premier paramètre n'est pas un plateau")
+    if type_pion == False :
+        raise TypeError(f"placerPionPlateau : Le second paramètre n'est pas un pion")
+    if type(colonne) != int :
+        raise TypeError(f"« placerPionPlateau : Le troisième paramètre n’est pas un entier ")
+    if colonne < 0 or colonne > len(plateau) :
+        raise ValueError(f" placerPionPlateau : La valeur de la colonne ({colonne}) n'est pas correcte")
     ligne = -1
     i = const.NB_LINES -1
     while i >= 0 and ligne == -1:
-        if plateau[i][colonne] is None :
+        if plateau[i][colonne] is None:
             plateau[i][colonne] = pion
             ligne = i
         i = i - 1
-        print(i)
     return ligne
 
