@@ -34,7 +34,7 @@ def type_plateau(plateau: list) -> bool:
         return False
     return True
 
-def constuirePlateau() -> list :
+def construirePlateau() -> list :
     """
     Construit un plateau
     :return: Liste 2D formant un tableau de ligne
