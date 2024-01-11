@@ -82,3 +82,38 @@ def toStringPlateau(plateau : list) -> str :
     for i in range(20):
         placerPionPlateau(p, construirePion(choice(const.COULEURS)), randint(0, const.NB_COLUMNS - 1))
     print(toStringPlateau(p))
+
+
+def detecter4horizontalPlateau(plateau : list, couleur : int) -> list :
+    """
+    Permet de retrouver les puissances 4 horizontaux
+    :param plateau: plateau construit par la fonction construirePlateau
+    :param couleur: couleur entre jaune et rouge
+    :return: retourne une liste de 4 même couleur mis en paramètre
+    """
+    if type_plateau == False :
+        raise TypeError(f" detecter4horizontalPlateau : Le premier paramètre ne correspond pas à un plateau")
+    if type(couleur) != int :
+        raise TypeError(f"« detecter4horizontalPlateau : Le second paramètre n’est pas un entier ")
+    puissance4 = []
+    a = 0
+    for i in range(len(const.COULEURS)):
+        if couleur == const.COULEURS[i]:
+            a += 1
+    if a == 0:
+        raise ValueError(f" detecter4horizontalPlateau : La valeur de la couleur {couleur} n'est pas un paramètre")
+    a = 0
+    for i in range(len(plateau)) :
+        for j in range(len(plateau[i])-3) :
+            if plateau[i][j] == couleur :
+                if plateau[i][j+1] == couleur :
+                    if plateau[i][j+2] == couleur :
+                        if plateau[i][j+3] == couleur :
+                            puissance4.append([couleur,couleur,couleur,couleur])
+                            break
+    return puissance4
+
+
+
+
+
