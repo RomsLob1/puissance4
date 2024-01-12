@@ -226,3 +226,20 @@ def getPionsGagnantsPlateau(plateau : list) -> list :
     puissance4.append(detecter4diagonaleDirectePlateau(plateau, const.ROUGE))
     return puissance4
 
+def isRempliPlateau(plateau :list) -> bool :
+    """
+    Reporte vrai ou faux si le tableau est rempli
+    :param plateau: plateau liste 2d
+    :return: True si le tableau est rempli, False si le tableau n'est pas rempli
+    """
+    if type_plateau == False:
+        raise TypeError(f" isRempliPlateau : Le paramètre n'est pas un plateau")
+    rempli = True
+    for i in range(len(plateau)) :
+        for j in range(len(plateau[0])) :
+            if type(plateau[i][j]) != int :
+                rempli = False
+    return rempli
+
+
+
