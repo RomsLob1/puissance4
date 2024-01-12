@@ -101,16 +101,24 @@ def detecter4horizontalPlateau(plateau : list, couleur : int) -> list :
             a += 1
     if a == 0:
         raise ValueError(f" detecter4horizontalPlateau : La valeur de la couleur {couleur} n'est pas correcte")
+
+    pion = {const.COULEUR : couleur, const.ID : None}
     puissance4 = []
     for i in range(len(plateau)) :
+        puissance42 = []
         for j in range(len(plateau[i])-3) :
-            if plateau[i][j] == couleur :
-                if plateau[i][j+1] == couleur :
-                    if plateau[i][j+2] == couleur :
-                        if plateau[i][j+3] == couleur :
-                            puissance4.append([construirePion(couleur),construirePion(couleur),construirePion(couleur),construirePion(couleur)])
+            if plateau[i][j] == pion :
+                puissance42.append(plateau[i][j])
+                if plateau[i][j+1] == pion :
+                    puissance42.append(plateau[i][j+1])
+                    if plateau[i][j+2] == pion  :
+                        puissance42.append(plateau[i][j+2])
+                        if plateau[i][j+3] == pion :
+                            puissance42.append(plateau[i][j+3])
+                            puissance4.append(puissance42)
                             break
     return puissance4
+
 def detecter4verticalPlateau(plateau : list, couleur : int) -> list :
     """
     Permet de retrouver les puissances 4 verticals
@@ -129,14 +137,20 @@ def detecter4verticalPlateau(plateau : list, couleur : int) -> list :
             a += 1
     if a == 0:
         raise ValueError(f" detecter4verticalPlateau : La valeur de la couleur {couleur} n'est pas correcte")
+    pion = {const.COULEUR: couleur, const.ID: None}
     puissance4 = []
     for i in range(len(plateau[0])):
+        puissance42 = []
         for j in range(len(plateau)-3):
-            if plateau[j][i] == couleur :
-                if plateau[j+1][i] == couleur :
-                    if plateau[j+2][i] == couleur :
-                        if plateau[j+3][i] == couleur :
-                            puissance4.append([construirePion(couleur),construirePion(couleur),construirePion(couleur),construirePion(couleur)])
+            if plateau[j][i] == pion :
+                puissance42.append(plateau[j][i])
+                if plateau[j+1][i] == pion :
+                    puissance42.append(plateau[j+1][i])
+                    if plateau[j+2][i] == pion :
+                        puissance42.append(plateau[j+2][i])
+                        if plateau[j+3][i] == pion :
+                            puissance42.append(plateau[j+3][i])
+                            puissance4.append(puissance42)
                             break
     return puissance4
 
@@ -158,20 +172,25 @@ def detecter4diagonaleDirectePlateau(plateau : list, couleur : int) -> list :
             a += 1
     if a == 0:
         raise ValueError(f" detecter4diagonalDirectePlateau : La valeur de la couleur {couleur} n'est pas correcte")
+    pion = {const.COULEUR: couleur, const.ID: None}
     puissance4 = []
     for i in range(len(plateau[0])-3):
+        puissance42 = []
         for j in range(len(plateau)-3):
-            if plateau[j][i] == couleur :
-                if plateau[j+1][i+1] == couleur :
-                    if plateau[j+2][i+2] == couleur :
-                        if plateau[j+3][i+3] == couleur :
+            if plateau[j][i] == pion :
+                puissance42.append(plateau[j][i])
+                if plateau[j+1][i+1] == pion :
+                    puissance42.append(plateau[j+1][i+1])
+                    if plateau[j+2][i+2] == pion :
+                        puissance42.append(plateau[j+2][i+2])
+                        if plateau[j+3][i+3] == pion :
+                            puissance42.append(plateau[j+3][i+3])
                             if i == 0 or j == 0:
-                                puissance4.append([construirePion(couleur), construirePion(couleur), construirePion(couleur), construirePion(couleur)])
+                                puissance4.append(puissance42)
                             elif i > 0 and j < len(plateau) - 1:
-                                if plateau[i -1][j - 1] != couleur:
-                                    puissance4.append([construirePion(couleur), construirePion(couleur), construirePion(couleur), construirePion(couleur)])
+                                if plateau[i -1][j - 1] != pion:
+                                    puissance4.append(puissance42)
     return puissance4
-
 def detecter4diagonaleIndirectePlateau(plateau: list, couleur: int) -> list :
     """
         Permet de retrouver les puissances 4 sur les diagonales directes
@@ -190,21 +209,24 @@ def detecter4diagonaleIndirectePlateau(plateau: list, couleur: int) -> list :
             a += 1
     if a == 0:
         raise ValueError(f" detecter4diagonalDirectePlateau : La valeur de la couleur {couleur} n'est pas correcte")
-
+    pion = {const.COULEUR: couleur, const.ID: None}
     puissance4 = []
     for i in range(0,len(plateau[0])-3):
-
+        puissance42 = []
         for j in range(len(plateau)-1,2,-1):
-
-            if plateau[j][i] == couleur :
-                if plateau[j-1][i+1] == couleur :
-                    if plateau[j-2][i+2] == couleur :
-                        if plateau[j-3][i+3] == couleur :
+            if plateau[j][i] == pion :
+                puissance42.append(plateau[j][i])
+                if plateau[j-1][i+1] == pion :
+                    puissance42.append(plateau[j-1][i+1])
+                    if plateau[j-2][i+2] == pion :
+                        puissance42.append(plateau[j-2][i+2])
+                        if plateau[j-3][i+3] == pion :
+                            puissance42.append(plateau[j-3][i+3])
                             if i == 0 or j == len(plateau)-1:
-                                puissance4.append([construirePion(couleur), construirePion(couleur), construirePion(couleur), construirePion(couleur)])
+                                puissance4.append(puissance42)
                             elif i > 0 and j < len(plateau)-1:
                                 if plateau[i+1][j-1] != couleur :
-                                    puissance4.append([construirePion(couleur), construirePion(couleur),construirePion(couleur),construirePion(couleur)])
+                                    puissance4.append(puissance42)
     return puissance4
 
 def getPionsGagnantsPlateau(plateau : list) -> list :
