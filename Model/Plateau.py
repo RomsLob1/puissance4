@@ -159,14 +159,17 @@ def detecter4diagonaleDirectePlateau(plateau : list, couleur : int) -> list :
     if a == 0:
         raise ValueError(f" detecter4diagonalDirectePlateau : La valeur de la couleur {couleur} n'est pas correcte")
     puissance4 = []
-    for i in range(len(plateau[0])-4):
+    for i in range(len(plateau[0])-3):
         for j in range(len(plateau)-3):
             if plateau[j][i] == couleur :
                 if plateau[j+1][i+1] == couleur :
                     if plateau[j+2][i+2] == couleur :
                         if plateau[j+3][i+3] == couleur :
-                            if plateau[j-1][i-1] != couleur:
-                                puissance4.append([[construirePion(couleur),construirePion(couleur),construirePion(couleur),construirePion(couleur)]])
+                            if i == 0 or j == 0:
+                                puissance4.append([construirePion(couleur), construirePion(couleur), construirePion(couleur), construirePion(couleur)])
+                            elif i > 0 and j < len(plateau) - 1:
+                                if plateau[i -1][j - 1] != couleur:
+                                    puissance4.append([construirePion(couleur), construirePion(couleur), construirePion(couleur), construirePion(couleur)])
     return puissance4
 
 def detecter4diagonaleIndirectePlateau(plateau: list, couleur: int) -> list :
@@ -187,15 +190,22 @@ def detecter4diagonaleIndirectePlateau(plateau: list, couleur: int) -> list :
             a += 1
     if a == 0:
         raise ValueError(f" detecter4diagonalDirectePlateau : La valeur de la couleur {couleur} n'est pas correcte")
+
     puissance4 = []
-    for i in range(len(plateau[0])):
-        for j in range(len(plateau),0,-1):
+    for i in range(0,len(plateau[0])-3):
+
+        for j in range(len(plateau)-1,2,-1):
+
             if plateau[j][i] == couleur :
-                if plateau[j+1][i+1] == couleur :
-                    if plateau[j+2][i+2] == couleur :
-                        if plateau[j+3][i+3] == couleur :
-                            if plateau[j-1][i-1] != couleur:
-                                puissance4.append([[construirePion(couleur),construirePion(couleur),construirePion(couleur),construirePion(couleur)]])
+                if plateau[j-1][i+1] == couleur :
+                    if plateau[j-2][i+2] == couleur :
+                        if plateau[j-3][i+3] == couleur :
+                            if i == 0 or j == len(plateau)-1:
+                                puissance4.append([construirePion(couleur), construirePion(couleur), construirePion(couleur), construirePion(couleur)])
+                            elif i > 0 and j < len(plateau)-1:
+                                if plateau[i+1][j-1] != couleur :
+                                    puissance4.append([construirePion(couleur), construirePion(couleur),construirePion(couleur),construirePion(couleur)])
+    return puissance4
 
 
 
