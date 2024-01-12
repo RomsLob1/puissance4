@@ -207,7 +207,22 @@ def detecter4diagonaleIndirectePlateau(plateau: list, couleur: int) -> list :
                                     puissance4.append([construirePion(couleur), construirePion(couleur),construirePion(couleur),construirePion(couleur)])
     return puissance4
 
-
-
-
+def getPionsGagnantsPlateau(plateau : list) -> list :
+    """
+    Fonction qui renvoie une liste des pions formant une puissance 4 sur le plateau
+    :param plateau: liste 2d qui représente un tableau
+    :return: list des pions formant une puissance 4
+    """
+    if type_plateau == False:
+        raise TypeError(f" getPionsGagnantsPlateau : Le paramètre n'est pas un plateau")
+    puissance4 = []
+    puissance4.append(detecter4verticalPlateau(plateau, const.JAUNE))
+    puissance4.append(detecter4verticalPlateau(plateau, const.ROUGE))
+    puissance4.append(detecter4horizontalPlateau(plateau, const.JAUNE))
+    puissance4.append(detecter4horizontalPlateau(plateau, const.ROUGE))
+    puissance4.append(detecter4diagonaleIndirectePlateau(plateau, const.JAUNE))
+    puissance4.append(detecter4diagonaleIndirectePlateau(plateau, const.ROUGE))
+    puissance4.append(detecter4diagonaleDirectePlateau(plateau, const.JAUNE))
+    puissance4.append(detecter4diagonaleDirectePlateau(plateau, const.ROUGE))
+    return puissance4
 
