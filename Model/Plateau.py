@@ -143,3 +143,4 @@ def detecter4verticalPlateau(plateau : list, couleur : int) -> list :
 
 
 
+
