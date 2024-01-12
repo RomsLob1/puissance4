@@ -108,7 +108,7 @@ def detecter4horizontalPlateau(plateau : list, couleur : int) -> list :
                 if plateau[i][j+1] == couleur :
                     if plateau[i][j+2] == couleur :
                         if plateau[i][j+3] == couleur :
-                            puissance4.append([couleur,couleur,couleur,couleur])
+                            puissance4.append([construirePion(couleur),construirePion(couleur),construirePion(couleur),construirePion(couleur)])
                             break
     return puissance4
 def detecter4verticalPlateau(plateau : list, couleur : int) -> list :
@@ -136,7 +136,7 @@ def detecter4verticalPlateau(plateau : list, couleur : int) -> list :
                 if plateau[j+1][i] == couleur :
                     if plateau[j+2][i] == couleur :
                         if plateau[j+3][i] == couleur :
-                            puissance4.append([couleur,couleur,couleur,couleur])
+                            puissance4.append([construirePion(couleur),construirePion(couleur),construirePion(couleur),construirePion(couleur)])
                             break
     return puissance4
 
@@ -165,18 +165,17 @@ def detecter4diagonaleDirectePlateau(plateau : list, couleur : int) -> list :
                 if plateau[j+1][i+1] == couleur :
                     if plateau[j+2][i+2] == couleur :
                         if plateau[j+3][i+3] == couleur :
-                            puissance4.append([couleur,couleur,couleur,couleur])
-                            break
-
+                            if plateau[j-1][i-1] != couleur:
+                                puissance4.append([[construirePion(couleur),construirePion(couleur),construirePion(couleur),construirePion(couleur)]])
     return puissance4
 
 print(detecter4diagonaleDirectePlateau(
-    [[0,1,0,0,1,0,1],
-            [1,0,0,0,1,1,1],
-            [0,0,0,0,0,1,0],
-            [0,0,0,0,0,0,0],
-            [1,1,1,0,0,0,0],
-            [0,1,0,1,0,0,0]],0))
+    [[1,1,0,0,1,0,1],
+            [1,1,1,0,1,1,1],
+            [0,0,1,1,0,1,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,0,1,0,0],
+            [0,1,0,1,0,1,0]],1))
 
 
 
