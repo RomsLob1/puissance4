@@ -100,7 +100,7 @@ def detecter4horizontalPlateau(plateau : list, couleur : int) -> list :
         if couleur == const.COULEURS[i]:
             a += 1
     if a == 0:
-        raise ValueError(f" detecter4horizontalPlateau : La valeur de la couleur {couleur} n'est pas un paramètre")
+        raise ValueError(f" detecter4horizontalPlateau : La valeur de la couleur {couleur} n'est pas correcte")
     puissance4 = []
     for i in range(len(plateau)) :
         for j in range(len(plateau[i])-3) :
@@ -128,7 +128,7 @@ def detecter4verticalPlateau(plateau : list, couleur : int) -> list :
         if couleur == const.COULEURS[i]:
             a += 1
     if a == 0:
-        raise ValueError(f" detecter4verticalPlateau : La valeur de la couleur {couleur} n'est pas un paramètre")
+        raise ValueError(f" detecter4verticalPlateau : La valeur de la couleur {couleur} n'est pas correcte")
     puissance4 = []
     for i in range(len(plateau[0])):
         for j in range(len(plateau)-3):
@@ -139,6 +139,44 @@ def detecter4verticalPlateau(plateau : list, couleur : int) -> list :
                             puissance4.append([couleur,couleur,couleur,couleur])
                             break
     return puissance4
+
+def detecter4diagonaleDirectePlateau(plateau : list, couleur : int) -> list :
+    """
+        Permet de retrouver les puissances 4 sur les diagonales directes
+        :param plateau: plateau construit par la fonction construirePlateau
+        :param couleur: couleur entre jaune et rouge
+        :return: retourne une liste de liste de 4 même couleur mis en paramètre
+        """
+    if type_plateau == False :
+        raise TypeError(f" detecter4diagonalDirectePlateau : Le premier paramètre ne correspond pas à un plateau")
+    if type(couleur) != int :
+        raise TypeError(f"« detecter4diagonalDirectePlateau : Le second paramètre n’est pas un entier ")
+    puissance4 = []
+    a = 0
+    for i in range(len(const.COULEURS)):
+        if couleur == const.COULEURS[i]:
+            a += 1
+    if a == 0:
+        raise ValueError(f" detecter4diagonalDirectePlateau : La valeur de la couleur {couleur} n'est pas correcte")
+    puissance4 = []
+    for i in range(len(plateau[0])-4):
+        for j in range(len(plateau)-3):
+            if plateau[j][i] == couleur :
+                if plateau[j+1][i+1] == couleur :
+                    if plateau[j+2][i+2] == couleur :
+                        if plateau[j+3][i+3] == couleur :
+                            puissance4.append([couleur,couleur,couleur,couleur])
+                            break
+
+    return puissance4
+
+print(detecter4diagonaleDirectePlateau(
+    [[0,1,0,0,1,0,1],
+            [1,0,0,0,1,1,1],
+            [0,0,0,0,0,1,0],
+            [0,0,0,0,0,0,0],
+            [1,1,1,0,0,0,0],
+            [0,1,0,1,0,0,0]],0))
 
 
 
