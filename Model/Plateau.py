@@ -78,10 +78,26 @@ def toStringPlateau(plateau : list) -> str :
     :param plateau: Liste 2d formant un tableau
     :return: chaine de caractère qui représente le tableau
     """
-    p = construirePlateau()
-    for i in range(20):
-        placerPionPlateau(p, construirePion(choice(const.COULEURS)), randint(0, const.NB_COLUMNS - 1))
-    print(toStringPlateau(p))
+    res = ""
+
+    for i in range(len(plateau)):
+        for j in range(len(plateau[i])):
+            if plateau[i][j] is not None and plateau[i][j].get(const.COULEUR) == 1:
+                res += "|" + "\x1B[41m \x1B[0m"
+            elif plateau[i][j] is not None and plateau[i][j].get(const.COULEUR) == 0:
+                res += "|" + "\x1B[43m \x1B[0m"
+            else:
+                res += "|" + " "
+        res += "|\n"
+
+    for i in range(len(plateau[0]) * 2 + 1):
+        res += "-"
+    res += "\n"
+
+    for i in range(len(plateau[0])):
+        res += " " + str(i)
+
+    return res
 
 
 def detecter4horizontalPlateau(plateau : list, couleur : int) -> list :
@@ -102,20 +118,19 @@ def detecter4horizontalPlateau(plateau : list, couleur : int) -> list :
     if a == 0:
         raise ValueError(f" detecter4horizontalPlateau : La valeur de la couleur {couleur} n'est pas correcte")
 
-    pion = {const.COULEUR : couleur, const.ID : None}
     puissance4 = []
     for i in range(len(plateau)) :
         puissance42 = []
         for j in range(len(plateau[i])-3) :
-            if plateau[i][j] == pion :
+            if plateau[i][j] is not None and plateau[i][j].get(const.COULEUR) == couleur :
                 puissance42.append(plateau[i][j])
-                if plateau[i][j+1] == pion :
+                if plateau[i][j+1] is not None and plateau[i][j+1].get(const.COULEUR) == couleur :
                     puissance42.append(plateau[i][j+1])
-                    if plateau[i][j+2] == pion  :
+                    if plateau[i][j+2] is not None and plateau[i][j+2].get(const.COULEUR) == couleur  :
                         puissance42.append(plateau[i][j+2])
-                        if plateau[i][j+3] == pion :
+                        if plateau[i][j+3] is not None and plateau[i][j+3].get(const.COULEUR) == couleur :
                             puissance42.append(plateau[i][j+3])
-                            puissance4.append(puissance42)
+                            puissance4.extend(puissance42)
                             break
     return puissance4
 
@@ -137,22 +152,23 @@ def detecter4verticalPlateau(plateau : list, couleur : int) -> list :
             a += 1
     if a == 0:
         raise ValueError(f" detecter4verticalPlateau : La valeur de la couleur {couleur} n'est pas correcte")
-    pion = {const.COULEUR: couleur, const.ID: None}
+
     puissance4 = []
     for i in range(len(plateau[0])):
         puissance42 = []
         for j in range(len(plateau)-3):
-            if plateau[j][i] == pion :
+            if plateau[j][i] is not None and plateau[j][i].get(const.COULEUR) == couleur :
                 puissance42.append(plateau[j][i])
-                if plateau[j+1][i] == pion :
+                if plateau[j+1][i] is not None and plateau[j+1][i].get(const.COULEUR) == couleur :
                     puissance42.append(plateau[j+1][i])
-                    if plateau[j+2][i] == pion :
+                    if plateau[j+2][i] is not None and plateau[j+2][i].get(const.COULEUR) == couleur :
                         puissance42.append(plateau[j+2][i])
-                        if plateau[j+3][i] == pion :
+                        if plateau[j+3][i] is not None and plateau[j+3][i].get(const.COULEUR) == couleur :
                             puissance42.append(plateau[j+3][i])
-                            puissance4.append(puissance42)
+                            puissance4.extend(puissance42)
                             break
     return puissance4
+
 
 def detecter4diagonaleDirectePlateau(plateau : list, couleur : int) -> list :
     """
@@ -172,24 +188,23 @@ def detecter4diagonaleDirectePlateau(plateau : list, couleur : int) -> list :
             a += 1
     if a == 0:
         raise ValueError(f" detecter4diagonalDirectePlateau : La valeur de la couleur {couleur} n'est pas correcte")
-    pion = {const.COULEUR: couleur, const.ID: None}
     puissance4 = []
     for i in range(len(plateau[0])-3):
         puissance42 = []
         for j in range(len(plateau)-3):
-            if plateau[j][i] == pion :
+            if plateau[j][i] is not None and plateau[j][i].get(const.COULEUR) == couleur :
                 puissance42.append(plateau[j][i])
-                if plateau[j+1][i+1] == pion :
+                if plateau[j+1][i+1] is not None and plateau[j+1][i+1].get(const.COULEUR) == couleur :
                     puissance42.append(plateau[j+1][i+1])
-                    if plateau[j+2][i+2] == pion :
+                    if plateau[j+2][i+2] is not None and plateau[j+2][i+2].get(const.COULEUR) == couleur :
                         puissance42.append(plateau[j+2][i+2])
-                        if plateau[j+3][i+3] == pion :
+                        if plateau[j+3][i+3] is not None and plateau[j+3][i+3].get(const.COULEUR) == couleur :
                             puissance42.append(plateau[j+3][i+3])
                             if i == 0 or j == 0:
-                                puissance4.append(puissance42)
+                                puissance4.extend(puissance42)
                             elif i > 0 and j < len(plateau) - 1:
-                                if plateau[i -1][j - 1] != pion:
-                                    puissance4.append(puissance42)
+                                if plateau[i -1][j - 1] != couleur:
+                                    puissance4.extend(puissance42)
     return puissance4
 def detecter4diagonaleIndirectePlateau(plateau: list, couleur: int) -> list :
     """
@@ -209,24 +224,24 @@ def detecter4diagonaleIndirectePlateau(plateau: list, couleur: int) -> list :
             a += 1
     if a == 0:
         raise ValueError(f" detecter4diagonalDirectePlateau : La valeur de la couleur {couleur} n'est pas correcte")
-    pion = {const.COULEUR: couleur, const.ID: None}
+
     puissance4 = []
     for i in range(0,len(plateau[0])-3):
         puissance42 = []
         for j in range(len(plateau)-1,2,-1):
-            if plateau[j][i] == pion :
+            if plateau[j][i] is not None and plateau[j][i].get(const.COULEUR) == couleur :
                 puissance42.append(plateau[j][i])
-                if plateau[j-1][i+1] == pion :
+                if plateau[j-1][i+1] is not None and plateau[j-1][i+1].get(const.COULEUR) == couleur :
                     puissance42.append(plateau[j-1][i+1])
-                    if plateau[j-2][i+2] == pion :
+                    if plateau[j-2][i+2] is not None and plateau[j-2][i+2].get(const.COULEUR) == couleur :
                         puissance42.append(plateau[j-2][i+2])
-                        if plateau[j-3][i+3] == pion :
+                        if plateau[j-3][i+3] is not None and plateau[j-3][i+3].get(const.COULEUR) == couleur :
                             puissance42.append(plateau[j-3][i+3])
                             if i == 0 or j == len(plateau)-1:
-                                puissance4.append(puissance42)
+                                puissance4.extend(puissance42)
                             elif i > 0 and j < len(plateau)-1:
                                 if plateau[i+1][j-1] != couleur :
-                                    puissance4.append(puissance42)
+                                    puissance4.extend(puissance42)
     return puissance4
 
 def getPionsGagnantsPlateau(plateau : list) -> list :
@@ -237,16 +252,14 @@ def getPionsGagnantsPlateau(plateau : list) -> list :
     """
     if type_plateau == False:
         raise TypeError(f" getPionsGagnantsPlateau : Le paramètre n'est pas un plateau")
-    puissance4 = []
-    puissance4.append(detecter4verticalPlateau(plateau, const.JAUNE))
-    puissance4.append(detecter4verticalPlateau(plateau, const.ROUGE))
-    puissance4.append(detecter4horizontalPlateau(plateau, const.JAUNE))
-    puissance4.append(detecter4horizontalPlateau(plateau, const.ROUGE))
-    puissance4.append(detecter4diagonaleIndirectePlateau(plateau, const.JAUNE))
-    puissance4.append(detecter4diagonaleIndirectePlateau(plateau, const.ROUGE))
-    puissance4.append(detecter4diagonaleDirectePlateau(plateau, const.JAUNE))
-    puissance4.append(detecter4diagonaleDirectePlateau(plateau, const.ROUGE))
-    return puissance4
+    listeSeriesPionsAlignes = []
+    for i in const.COULEURS:
+        listeSeriesPionsAlignes.extend(detecter4verticalPlateau(plateau, i))
+        listeSeriesPionsAlignes.extend(detecter4horizontalPlateau(plateau, i))
+        listeSeriesPionsAlignes.extend(detecter4diagonaleIndirectePlateau(plateau, i))
+        listeSeriesPionsAlignes.extend(detecter4diagonaleDirectePlateau(plateau, i))
+
+    return listeSeriesPionsAlignes
 
 def isRempliPlateau(plateau :list) -> bool :
     """
