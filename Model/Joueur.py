@@ -87,3 +87,18 @@ def getPionJoueur(joueur : dict) -> dict :
         raise TypeError("getPionJoueur : Le paramètre ne correspond pas à un joueur")
     pion = {const.COULEUR : joueur[const.COULEUR], const.ID : None}
     return pion
+
+def setPlateauJoueur(joueur : dict, plateau : list) -> None :
+    """
+    Met en place le plateau dans le dictionnaire joueur
+    :param joueur: Dictionnaire représentant un joueur
+    :param plateau: Liste 2D qui représentent le plateau
+    :return: None
+    """
+    if type_joueur(joueur) == False :
+        raise TypeError("setPlateauJoueur : Le premier paramètre ne correspond pas à un joueur")
+    if type_plateau(plateau) == False :
+        raise TypeError("setPlateauJoueur : Le second paramètre ne correspond pas à un plateau")
+    joueur[const.PLATEAU] = plateau
+    return None
+
