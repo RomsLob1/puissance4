@@ -47,3 +47,13 @@ def construireJoueur(couleur : int) -> dict :
         raise ValueError(f"construireJoueur : L'entier donné ({couleur}) n'est pas une couleur")
     return joueur
 
+def getCouleurJoueur(joueur : dict) -> int :
+    """
+    Donne la couleur du joueur
+    :param joueur: Dictionnaire représentant un joueur
+    :return: la couleur du joueur
+    """
+    if type_joueur(joueur) == False :
+        raise TypeError("getCouleurJoueur : Le paramètre ne correspond pas à un joueur")
+    return joueur[const.COULEUR]
+
