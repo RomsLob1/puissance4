@@ -102,3 +102,16 @@ def setPlateauJoueur(joueur : dict, plateau : list) -> None :
     joueur[const.PLATEAU] = plateau
     return None
 
+def setPlacerPionJoueur(joueur : dict, placerPion : callable) -> None :
+    """
+    Met ne place la fonction PlacerPion dans le dictionnaire joueur
+    :param joueur: Dictionnaire représentent un joueur
+    :param placerPion: fonction
+    """
+    if type_joueur(joueur) == False :
+        raise TypeError("setPlacerPionJoueur : Le premier paramètre ne correspond pas à un joueur")
+    if callable(placerPion) == False :
+        raise TypeError("setPlateauPionJoueur :Le second paramètre n'est pas une fonction")
+    joueur[const.PLACER_PION] = placerPion
+    return None
+
