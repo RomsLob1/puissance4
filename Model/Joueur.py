@@ -115,3 +115,12 @@ def setPlacerPionJoueur(joueur : dict, placerPion : callable) -> None :
     joueur[const.PLACER_PION] = placerPion
     return None
 
+def _placerPionJoueur(joueur : dict) -> int :
+
+    libre = False
+    while libre == False :
+        colonne = randint(0, const.NB_COLUMNS - 1)
+        if joueur[const.PLATEAU[0][colonne]] == None :
+            libre = True
+
+    return colonne
