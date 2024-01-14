@@ -295,3 +295,12 @@ def placerPionLignePlateau(plateau : list, pion : dict, ligne : int, direction :
         raise ValueError(f"placerPionLignePlateau : Le troisième paramètre (valeur_du_paramètre) ne désigne pas une ligne")
     if type(direction) != bool :
         raise TypeError(f"placerPionLignePlateau : le quatrième paramètre n’est pas un booléen")
+
+def encoderPlateau(plateau : list) -> str :
+    """
+    Retourne la chaine de caractères qui correspond à l'encodage du plateau aves les caractères "_"; "R" et "J"
+    :param plateau: liste 2D représentant un tableau
+    :return: l'encodage du plateau sous forme de caractères
+    """
+    if type(plateau) != list :
+        raise TypeError(f"encoderPlateau : le paramètre ne correspond pas à un plateau. ")
