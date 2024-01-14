@@ -302,5 +302,17 @@ def encoderPlateau(plateau : list) -> str :
     :param plateau: liste 2D représentant un tableau
     :return: l'encodage du plateau sous forme de caractères
     """
-    if type(plateau) != list :
+    if type_plateau == False :
         raise TypeError(f"encoderPlateau : le paramètre ne correspond pas à un plateau. ")
+
+def isPatPlateau(plateau : list, histogrammeplt : dict) -> bool:
+    """
+    Retourne True si c'est la 5ème fois qu'on "rencontre" le plateau, sinon False
+    :param plateau: liste 2D représentant un tableau
+    :param histogrammeplt: histogramme des plateaux
+    :return: True si c'est la 5ème fois qu'on "rencontre" le plateau, sinon False
+    """
+    if type_plateau() == False :
+        raise TypeError(f"isPatPlateau : Le premier paramètre n’est pas un plateau ")
+    if type(histogrammeplt) != dict :
+        raise TypeError(f"isPatPlateau : Le second paramètre n’est pas un dictionnaire")
