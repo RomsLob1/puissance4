@@ -147,3 +147,15 @@ def initialiserIAJoueur(joueur : dict, tour : bool) -> None :
 
     setPlacerPionJoueur(joueur,_placerPionJoueur)
     return None
+
+def setModeEtenduJoueur(joueur : dict, clé : bool) -> None :
+    """
+    Ajoute ou retire la clé const.MODE_ETENDU chez le joueur, permet d'activer le mode étendu
+    :param joueur: dictionnaire représentant un joueur
+    :param clé: True par défaut, si True ajoute la clé const.MODE_ETENDU dans le dictionnaire du joueur sinon False
+    :return: None
+    """
+    if type_joueur(joueur) == False :
+        raise TypeError("setModeEtenduJoueur : le premier paramètre ne correspond pas à un joueur")
+    if type(clé) != bool :
+        raise TypeError("setModeEtenduJoueur :  le second paramètre ne correspond pas à un booléen =.")
