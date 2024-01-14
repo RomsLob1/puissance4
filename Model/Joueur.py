@@ -115,22 +115,21 @@ def setPlacerPionJoueur(joueur : dict, placerPion : callable) -> None :
     joueur[const.PLACER_PION] = placerPion
     return None
 
-def _placerPionJoueur(joueur : dict) -> int :
+
+def _placerPionJoueur(joueur: dict) -> int:
     """
-    Choisit une colonne du plateau dans laquelle l'ia jouera, la colonne choisit n'est pas remplie
+    Choisit une colonne du plateau dans laquelle l'IA jouera, la colonne choisie n'est pas remplie
     :param joueur: dictionnaire représentant un joueur
-    :return: la colonne ou joue l'IA
+    :return: la colonne où joue l'IA
     """
-
     libre = False
-    while libre == False:
-        colonne = randint(0, const.NB_COLUMNS-1)
-        print(joueur[const.PLATEAU[0][colonne]])
-        if joueur[const.PLATEAU[0][colonne]] == None:
-
+    while not libre:
+        colonne = randint(0, const.NB_COLUMNS - 1)
+        if colonne >= len(const.PLATEAU[0]):
+            continue
+        case = const.PLATEAU[0][colonne]
+        if case in joueur and joueur[case] is None:
             libre = True
-
-
     return colonne
 
 def initialiserIAJoueur(joueur : dict, tour : bool) -> None :
@@ -144,5 +143,7 @@ def initialiserIAJoueur(joueur : dict, tour : bool) -> None :
         raise TypeError("initialiserIAJoueur : Le premier paramètre n'est pas un joueur")
     if type(tour) != bool :
         raise TypeError("initialiserIAJoueur : Le second paramètre n'est pas un booléen")
-    setPlacerPionJoueur(joueur,_placerPionJoueur(joueur))
+    IA = _placerPionJoueur(joueur)
+
+    setPlacerPionJoueur(joueur,_placerPionJoueur)
     return None

@@ -1,6 +1,7 @@
 from Model.Constantes import *
 from Model.Plateau import *
 from Model.Pion import *
+from Model.Joueur import *
 
 p = construirePlateau()
 print(p)

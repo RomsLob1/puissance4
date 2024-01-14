@@ -276,5 +276,22 @@ def isRempliPlateau(plateau :list) -> bool :
                 rempli = False
     return rempli
 
-
-
+def placerPionLignePlateau(plateau : list, pion : dict, ligne : int, direction : bool) -> tuple:
+    """
+    Placer le pion sur la ligne en paramètr, pousser horizontalement
+    :param plateau: liste 2d représentant un plateau
+    :param pion: dictionnaire représentant un pion
+    :param ligne: numéro de ligne du
+    :param direction: True si poussée vers la gauche et vice-versa
+    :return: tuple des pions poussés par le mouvement
+    """
+    if type_plateau(plateau) == False :
+        raise TypeError(f"placerPionLignePlateau :Le premier paramètre n’est pas un plateau ")
+    if type_pion(pion) == False :
+        raise TypeError(f"placerPionLignePlateau : Le second paramètre n’est pasun pion ")
+    if type(ligne) != int :
+        raise TypeError(f"placerPionLignePlateau : le troisième paramètre n’est pas un entier")
+    if ligne < 0 or ligne > const.NB_LINES -1 :
+        raise ValueError(f"placerPionLignePlateau : Le troisième paramètre (valeur_du_paramètre) ne désigne pas une ligne")
+    if type(direction) != bool :
+        raise TypeError(f"placerPionLignePlateau : le quatrième paramètre n’est pas un booléen")
